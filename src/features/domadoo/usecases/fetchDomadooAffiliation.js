@@ -1,5 +1,6 @@
 const cheerio = require('cheerio');
 const domadooDatasource = require('../data/domadooDatasource');
+const { cacheDomadooAffiliation } = require('./cacheDomadooAffiliation');
 
 exports.fetchDomadooAffiliation = async () => {
     const data = await domadooDatasource.fetchDomadooAffiliateData();
@@ -21,8 +22,12 @@ exports.fetchDomadooAffiliation = async () => {
         balance: $("#myaffiliateaccount-summary .list-group-hover div:nth-child(7) span.pull-xs-right").first().text().trim(),  
     }
 
-    return {
+    const result = {
         last30days,
         total
     };
+
+    cacheDomadooAffiliation(result);
+
+    return result;
 };
