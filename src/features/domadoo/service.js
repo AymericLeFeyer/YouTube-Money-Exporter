@@ -1,9 +1,9 @@
 const cheerio = require('cheerio');
-const domadooDatasource = require('../data/domadooDatasource');
-const { set } = require('../../../utils/cache');
+const datasource = require('./datasource');
+const cache = require('../../utils/cache');
 
 exports.fetchDomadooAffiliation = async () => {
-    const data = await domadooDatasource.fetchDomadooAffiliateData();
+    const data = await datasource.fetchDomadooAffiliateData();
 
     const $ = cheerio.load(data);
     
@@ -24,10 +24,11 @@ exports.fetchDomadooAffiliation = async () => {
 
     const result = {
         last30days,
-        total
+        total,
+        lastUpdate: new Date().toISOString(),
     };
 
-    set(result, 'domadooAffiliation.json', '../features/domadoo/cache');
+    cache.set(result, 'domadoo.json');
 
     return result;
 };

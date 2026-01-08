@@ -1,10 +1,11 @@
 const cheerio = require('cheerio');
-const amazonDatasource = require('../data/amazonDatasource');
-const { set } = require('../../../utils/cache');
+const datasource = require('./datasource');
+const cache = require('../../utils/cache');
 
 exports.fetchAmazonAffiliation = async () => {
-    const reporting = await amazonDatasource.fetchAmazonReporting();
-    const history = await amazonDatasource.fetchAmazonPaymentHistory();
+    const reporting = await datasource.fetchAmazonReporting();
+    const history = await datasource.fetchAmazonPaymentHistory();
+
 
     const $reporting = cheerio.load(reporting);
     const $history = cheerio.load(history);
@@ -16,9 +17,10 @@ exports.fetchAmazonAffiliation = async () => {
             earnings: $reporting("#ac-report-commission-commision-total").text().trim().replace('€', '').trim() + ' €',
         },
         waitingPayments: $history("#payment-cards-section div div:nth-child(2) a span span").text().trim(),
+        lastUpdate: new Date().toISOString(),
     };
 
-    set(result, 'amazonAffiliation.json', '../features/amazon/cache');
+    cache.set(result, 'amazon.json');
 
     return result;
 };

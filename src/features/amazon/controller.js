@@ -1,11 +1,10 @@
 const router = require('express').Router();
-
-const { get } = require('../../utils/cache');
-const { fetchAmazonAffiliation } = require('./usecases/fetchAmazonAffiliation');
+const cache = require('../../utils/cache');
+const service = require('./service');
 
 router.get('/', async (req, res) => {
     try {
-        const data = await fetchAmazonAffiliation();
+        const data = await service.fetchAmazonAffiliation();
         res.json({ data });
     } catch (error) {
         console.error(error);
@@ -17,7 +16,7 @@ router.get('/', async (req, res) => {
 
 router.get('/last', async (req, res) => {
     try {
-        const cachedData = await get('amazonAffiliation.json', '../features/amazon/cache');
+        const cachedData = await cache.get('amazon.json', '../features/amazon/cache');
         if (cachedData) {
             res.json({ data: cachedData });
         } else {

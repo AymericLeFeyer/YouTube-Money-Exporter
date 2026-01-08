@@ -1,11 +1,11 @@
 const router = require('express').Router();
 
-const { get } = require('../../utils/cache');
-const { fetchDomadooAffiliation } = require('./usecases/fetchDomadooAffiliation');
+const cache = require('../../utils/cache');
+const service = require('./service');
 
 router.get('/', async (req, res) => {
     try {
-        const data = await fetchDomadooAffiliation();
+        const data = await service.fetchDomadooAffiliation();
         res.json({ data });
     } catch (error) {
         console.error(error);
@@ -17,7 +17,7 @@ router.get('/', async (req, res) => {
 
 router.get('/last', async (req, res) => {
     try {
-        const cachedData = await get('domadooAffiliation.json', '../features/domadoo/cache');
+        const cachedData = await cache.get('domadoo.json');
         if (cachedData) {
             res.json({ data: cachedData });
         } else {

@@ -1,11 +1,11 @@
 const router = require('express').Router();
 
-const { get } = require('../../utils/cache');
-const { fetchYouTubeReporting } = require('./usecases/fetchYouTubeReporting');
+const cache = require('../../utils/cache');
+const service = require('./service');
 
 router.get('/', async (req, res) => {
     try {
-        const data = await fetchYouTubeReporting();
+        const data = await service.fetchYouTubeReporting();
         res.json({ data });
     } catch (error) {
         console.error(error);
@@ -17,7 +17,7 @@ router.get('/', async (req, res) => {
 
 router.get('/last', async (req, res) => {
     try {
-        const cachedData = await get('youtubeReporting.json', '../features/youtube/cache');
+        const cachedData = await cache.get('youtube.json', '../features/youtube/cache');
         if (cachedData) {
             res.json({ data: cachedData });
         } else {

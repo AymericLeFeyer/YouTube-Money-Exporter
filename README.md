@@ -7,7 +7,8 @@ DOMADOO_COOKIE
 ```
 1. Login to domadoo
 2. Go to affiliation page
-3. Get the cookie
+3. Check the network tab and get the cookie from the `affiliation` document request
+   1. Request Headers -> Cookie
 
 ## YouTube
 
@@ -24,3 +25,15 @@ GCP_REFRESH_TOKEN
    3. YouTube Reporting API
 4. Ask your favorite AI how to get CLIENT_ID, CLIENT_SECRET and REFRESH_TOKEN
    1. You will have to use https://developers.google.com/oauthplayground/ to get your REFRESH_TOKEN
+
+## Amazon
+
+```
+AMAZON_COOKIE
+AMAZON_REPORTING_URL
+```
+
+1. Login to your Amazon Associates Account, and go to the reporting page, the one which starts by `/p/reporting/earnings?...`
+2. Copy the URL and paste it as `AMAZON_REPORTING_URL`
+3. Check the network tab and get the cookie from the `earnings?...` document request
+   1. Request Headers -> Cookie

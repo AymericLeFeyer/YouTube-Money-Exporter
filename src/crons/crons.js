@@ -1,14 +1,21 @@
 const cron = require('node-cron');
-const { fetchYouTubeReporting } = require('../features/youtube/usecases/fetchYouTubeReporting');
-const { fetchDomadooAffiliation } = require('../features/domadoo/usecases/fetchDomadooAffiliation');
+const youtubeService = require('../features/youtube/service');
+const domadooService = require('../features/domadoo/service');
+const amazonService = require('../features/amazon/service');
 
 const initCrons = () => {
-    // Exemple : S'exécute toutes les heures
+    // Each hour
     cron.schedule('0 * * * *', () => {
         console.log("🔄 Exécution des tâches planifiées...");
-        fetchYouTubeReporting();
-        fetchDomadooAffiliation();
+        youtubeService.fetchYouTubeReporting();
+        domadooService.fetchDomadooAffiliation();
     });
+    // Each day at midnight
+    cron.schedule('0 0 * * *', () => {
+        console.log("🔄 Exécution des tâches planifiées...");
+        amazonService.fetchAmazonAffiliation();
+    });
+   
     console.log("✅ Gestionnaire de tâches planifiées activé.");
 };
 

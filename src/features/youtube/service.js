@@ -1,8 +1,8 @@
-const youtubeReportingDatasource = require('../data/youtubeReportingDatasource');
-const { set } = require('../../../utils/cache');
+const datasource = require('./datasource');
+const cache = require('../../utils/cache');
 
 exports.fetchYouTubeReporting = async () => {
-    const data = await youtubeReportingDatasource.getYouTubeReportingData();
+    const data = await datasource.getYouTubeReportingData();
 
     const result = {
         last30days: {
@@ -17,9 +17,10 @@ exports.fetchYouTubeReporting = async () => {
         thisMonth: {
             estimatedRevenue: (Math.round((data.currentMonthRevenue) * 100) / 100).toString() + ' €',
         },
+        lastUpdate: new Date().toISOString(),
     };
 
-    set(result, 'youtubeReporting.json', '../features/youtube/cache');
+    cache.set(result, 'youtube.json');
 
     return result;
 }
