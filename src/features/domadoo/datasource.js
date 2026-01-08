@@ -4,12 +4,15 @@ exports.fetchDomadooAffiliateData = async () => {
     const url = "https://www.domadoo.fr/fr/affiliation"
     const cookie = process.env.DOMADOO_COOKIE;
 
-    console.error("cookie is ");
-    console.error(cookie);
+    console.error({
+            'Cookie': cookie,
+            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/',
+            'Accept': 'text/html',
+        });
 
     return await axios.get(url, {
         headers: {
-            'Cookie': cookie.replace(/\$\$/g, '$'),
+            'Cookie': cookie,
             'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/',
             'Accept': 'text/html',
         },
@@ -19,8 +22,7 @@ exports.fetchDomadooAffiliateData = async () => {
         return response.data;
     })
     .catch(error => {
-        console.error("ça pète")
-        console.error("❌ Erreure lors de la récupération des données d'affiliation Domadoo :", error.message);
+        console.error("❌ Erreur lors de la récupération des données d'affiliation Domadoo :", error.message);
     });
 };
 
