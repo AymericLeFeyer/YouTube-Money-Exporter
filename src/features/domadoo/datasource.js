@@ -4,8 +4,8 @@ exports.fetchDomadooAffiliateData = async () => {
     const url = "https://www.domadoo.fr/fr/affiliation"
     const cookie = process.env.DOMADOO_COOKIE;
 
-    console.log("cookie is ");
-    console.log(cookie);
+    console.error("cookie is ");
+    console.error(cookie);
 
     return await axios.get(url, {
         headers: {
@@ -19,6 +19,7 @@ exports.fetchDomadooAffiliateData = async () => {
         return response.data;
     })
     .catch(error => {
+        console.error("ça pète")
         console.error("❌ Erreur lors de la récupération des données d'affiliation Domadoo :", error.message);
     });
 };
