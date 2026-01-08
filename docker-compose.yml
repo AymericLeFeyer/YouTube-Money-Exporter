@@ -6,8 +6,6 @@ services:
     container_name: youtube_money_exporter
     ports:
       - "3333:3333"
-    volumes:
-      - .:/app
     working_dir: /app
     environment:
       - PORT=3333
