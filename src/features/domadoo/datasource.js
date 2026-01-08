@@ -20,7 +20,7 @@ exports.fetchDomadooAffiliateData = async () => {
     })
     .catch(error => {
         console.error("ça pète")
-        console.error("❌ Erreur lors de la récupération des données d'affiliation Domadoo :", error.message);
+        console.error("❌ Erreure lors de la récupération des données d'affiliation Domadoo :", error.message);
     });
 };
 
