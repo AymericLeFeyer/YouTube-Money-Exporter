@@ -15,7 +15,7 @@ Finally, you can get all the data with `GET /api/`
 5. Save & create the container
 
 ## Providers
-You can deactivate a provider in `index.js`
+If you don't need a provider, don't put anything in environnement variable
 **APIs**
 | Route                   | Role              | Comment                                                   |
 | --------------------- | ----------------- | --------------------------------------------------------- |
