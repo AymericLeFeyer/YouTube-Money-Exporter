@@ -6,6 +6,7 @@ exports.fetchAmazonAffiliation = async () => {
     console.log("🌐 Fetching Amazon data...");
 
     const reporting = await datasource.fetchAmazonReporting();
+    return reporting
     const history = await datasource.fetchAmazonPaymentHistory();
 
     const $reporting = cheerio.load(reporting);

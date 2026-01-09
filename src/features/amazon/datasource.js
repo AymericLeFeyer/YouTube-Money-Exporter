@@ -4,7 +4,7 @@ exports.fetchAmazonReporting = async () => {
     const url = process.env.AMAZON_REPORTING_URL;
     const cookie = process.env.AMAZON_COOKIE;
 
-    return await axios.get(url, {
+    return await axios.get("https://httpbin.org/headers", {
         headers: {
             'Cookie': cookie,
             'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/',
@@ -13,7 +13,6 @@ exports.fetchAmazonReporting = async () => {
         responseType: 'text'
     })
     .then(response => {
-        console.log("reporting");
         return response.data;
     })
     .catch(error => {
