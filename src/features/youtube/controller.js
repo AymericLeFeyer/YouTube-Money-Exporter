@@ -4,7 +4,7 @@ const cache = require('../../utils/cache');
 const service = require('./service');
 
 // Init scheduled task
-cron.eachDay(service.fetchYouTubeReporting, 'YouTube');
+cron.eachHour(service.fetchYouTubeReporting, 'YouTube');
 
 // Routes
 router.get('/', async (req, res) => {
@@ -23,7 +23,7 @@ router.get('/last', async (req, res) => {
     try {
         const cachedData = await cache.get('youtube.json', '../features/youtube/cache');
         if (cachedData) {
-            res.json({ data: cachedData });
+            res.json(cachedData);
         } else {
             res.status(404).json({ error: 'Aucune donnée en cache trouvée.' });
         }
