@@ -27,17 +27,17 @@ exports.openDomadooAffiliationPageAndFindData = async () => {
             uniquesClicks: await rows.locator("div:nth-child(2) span.pull-xs-right").first().innerText(),
             waitingSales: await rows.locator("div:nth-child(3) span.pull-xs-right").first().innerText(),
             approvedSales: await rows.locator("div:nth-child(4) span.pull-xs-right").first().innerText(),
-            earnings: await rows.locator("div:nth-child(5) span.pull-xs-right").first().innerText(),
+            earnings: (await rows.locator("div:nth-child(5) span.pull-xs-right").first().innerText()).replace(/\u00a0/g, ' ').replace(/\u202f/g, ' '),
         };
 
         const total = {
             clicks: await rows.locator("div:nth-child(1) span.pull-xs-right").nth(1).innerText(),
             uniquesClicks: await rows.locator("div:nth-child(2) span.pull-xs-right").nth(1).innerText(),
             approvedSales: await rows.locator("div:nth-child(3) span.pull-xs-right").nth(1).innerText(),
-            earnings: await rows.locator("div:nth-child(4) span.pull-xs-right").nth(1).innerText(),
-            payments: await rows.locator("div:nth-child(5) span.pull-xs-right").nth(1).innerText(),
-            waitingPayments: await rows.locator("div:nth-child(6) span.pull-xs-right").first().innerText(),
-            balance: await rows.locator("div:nth-child(7) span.pull-xs-right").first().innerText(),
+            earnings: (await rows.locator("div:nth-child(4) span.pull-xs-right").nth(1).innerText()).replace(/\u00a0/g, ' ').replace(/\u202f/g, ' '),
+            payments: (await rows.locator("div:nth-child(5) span.pull-xs-right").nth(1).innerText()).replace(/\u00a0/g, ' ').replace(/\u202f/g, ' '),
+            waitingPayments: (await rows.locator("div:nth-child(6) span.pull-xs-right").first().innerText()).replace(/\u00a0/g, ' ').replace(/\u202f/g, ' '),
+            balance: (await rows.locator("div:nth-child(7) span.pull-xs-right").first().innerText()).replace(/\u00a0/g, ' ').replace(/\u202f/g, ' '),
         };
 
         const table = page.locator("#myaffiliateaccount-sales-commissions table tbody");
@@ -47,8 +47,8 @@ exports.openDomadooAffiliationPageAndFindData = async () => {
             const row = table.locator("tr").nth(i);
             const id = await row.locator("td").nth(0).innerText();
             const date = await row.locator("td").nth(1).innerText();
-            const order = await row.locator("td").nth(2).innerText();
-            const commission = await row.locator("td").nth(3).innerText();
+            const order = (await row.locator("td").nth(2).innerText()).replace(/\u00a0/g, ' ').replace(/\u202f/g, ' ');
+            const commission = (await row.locator("td").nth(3).innerText()).replace(/\u00a0/g, ' ').replace(/\u202f/g, ' ');
             const status = (await row.locator("td").nth(4).innerText()).replaceAll('\n', ' ').trim();
             const approved = status.toLowerCase().includes('check')
 
