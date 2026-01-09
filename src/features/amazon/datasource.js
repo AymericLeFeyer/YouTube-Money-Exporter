@@ -1,12 +1,9 @@
-const { firefox } = require('playwright-extra');
-const StealthPlugin = require('puppeteer-extra-plugin-stealth');
-const stealth = StealthPlugin();
-stealth.enabledEvasions.delete('user-agent-override');
+const { firefox } = require('playwright');
+const {authenticator} = require('otplib');
 
-firefox.use(stealth);
 
 exports.openAmazonReportingPageAndFindData = async () => {
-    const browser = await firefox.launch({headless: true});
+    const browser = await firefox.launch({headless: false});
     const context = await browser.newContext();
     const page = await context.newPage();
 
@@ -17,6 +14,11 @@ exports.openAmazonReportingPageAndFindData = async () => {
         await page.click('#continue');
         await page.fill('#ap_password', process.env.AMAZON_PASSWORD);
         await page.click('#signInSubmit');
+        if (process.env.AMAZON_SECRET_KEY) {
+            const token = authenticator.generate(process.env.AMAZON_SECRET_KEY.replaceAll(/\s+/g, ''));
+            await page.fill('#auth-mfa-otpcode', token);
+            await page.click('#auth-signin-button');
+        }
         await page.waitForSelector('#ac-report-commission-commision-clicks', { timeout: 10000 });
 
         // Get the data
