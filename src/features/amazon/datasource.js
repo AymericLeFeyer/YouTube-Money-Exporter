@@ -13,7 +13,7 @@ exports.fetchAmazonReporting = async () => {
         responseType: 'text'
     })
     .then(response => {
-        console.log("reporting" + response.data);
+        console.log("reporting");
         return response.data;
     })
     .catch(error => {
@@ -34,7 +34,7 @@ exports.fetchAmazonPaymentHistory = async () => {
         responseType: 'text'
     })
     .then(response => {
-        console.log("history" + response.data);
+        console.log("history");
         return response.data;
     })
     .catch(error => {
