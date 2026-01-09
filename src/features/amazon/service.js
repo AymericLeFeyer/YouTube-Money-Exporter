@@ -8,7 +8,6 @@ exports.fetchAmazonAffiliation = async () => {
     const reporting = await datasource.fetchAmazonReporting();
     const history = await datasource.fetchAmazonPaymentHistory();
 
-
     const $reporting = cheerio.load(reporting);
     const $history = cheerio.load(history);
 
