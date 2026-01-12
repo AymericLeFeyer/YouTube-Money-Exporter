@@ -6,6 +6,9 @@ const service = require('./service');
 // Init scheduled task
 cron.eachHour(service.fetchDomadooAffiliation, 'Domadoo');
 
+// Launch first fetch immediately
+service.fetchDomadooAffiliation();
+
 // Routes
 router.get('/', async (req, res) => {
     try {

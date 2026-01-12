@@ -20,6 +20,9 @@ if (process.env.DOMADOO_LOGIN && process.env.DOMADOO_PASSWORD) {
 if (process.env.GCP_CLIENT_ID && process.env.GCP_CLIENT_SECRET && process.env.GCP_REFRESH_TOKEN) {
     app.use('/api/youtube', require('./src/features/youtube/controller'));
 }
+if (process.env.INSTAGRAM_USERNAME) {
+    app.use('/api/instagram', require('./src/features/instagram/controller'));
+}
 
 
 

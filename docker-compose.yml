@@ -17,5 +17,6 @@ services:
       - AMAZON_SECRET_KEY=${AMAZON_SECRET_KEY}
       - DOMADOO_LOGIN=${DOMADOO_LOGIN}
       - DOMADOO_PASSWORD=${DOMADOO_PASSWORD}
+      - INSTAGRAM_USERNAME=${INSTAGRAM_USERNAME}
     restart: always
     command: npm run start

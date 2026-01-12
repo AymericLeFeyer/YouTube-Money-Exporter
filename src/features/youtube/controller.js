@@ -6,6 +6,9 @@ const service = require('./service');
 // Init scheduled task
 cron.eachHour(service.fetchYouTubeReporting, 'YouTube');
 
+// Launch first fetch immediately
+service.fetchYouTubeReporting();
+
 // Routes
 router.get('/', async (req, res) => {
     try {

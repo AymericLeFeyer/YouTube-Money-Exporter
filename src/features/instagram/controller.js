@@ -4,27 +4,27 @@ const cache = require('../../utils/cache');
 const service = require('./service');
 
 // Init scheduled task
-cron.eachHour(service.fetchAmazonAffiliation, 'Amazon');
+cron.eachHour(service.fetchInstagramData, 'Instagram');
 
 // Launch first fetch immediately
-service.fetchAmazonAffiliation();
+service.fetchInstagramData();
 
 // Routes
 router.get('/', async (req, res) => {
     try {
-        const data = await service.fetchAmazonAffiliation();
+        const data = await service.fetchInstagramData();
         res.json(data);
     } catch (error) {
         console.error(error);
         res.status(500).json({ 
-            error: 'Erreur lors de la récupération des données Amazon.' 
+            error: 'Erreur lors de la récupération des données Instagram.' 
         });
     }
 });
 
 router.get('/last', async (req, res) => {
     try {
-        const cachedData = await cache.get('amazon.json', '../features/amazon/cache');
+        const cachedData = await cache.get('instagram.json', '../features/instagram/cache');
         if (cachedData) {
             res.json(cachedData);
         } else {
