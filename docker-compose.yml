@@ -18,5 +18,6 @@ services:
       - DOMADOO_LOGIN=${DOMADOO_LOGIN}
       - DOMADOO_PASSWORD=${DOMADOO_PASSWORD}
       - INSTAGRAM_USERNAME=${INSTAGRAM_USERNAME}
+      - DISCORD_SERVER_CODE=${DISCORD_SERVER_CODE}
     restart: always
     command: npm run start

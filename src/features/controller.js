@@ -7,8 +7,9 @@ router.get('/', async (req, res) => {
         const domadoo = await cache.get('domadoo.json');
         const amazon = await cache.get('amazon.json');
         const instagram = await cache.get('instagram.json');
+        const discord = await cache.get('discord.json');
 
-        res.json({ youtube, domadoo, amazon, instagram });
+        res.json({ youtube, domadoo, amazon, instagram, discord });
     } catch (error) {
         console.error(error);
         res.status(500).json({ 

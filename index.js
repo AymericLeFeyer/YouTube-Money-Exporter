@@ -23,6 +23,9 @@ if (process.env.GCP_CLIENT_ID && process.env.GCP_CLIENT_SECRET && process.env.GC
 if (process.env.INSTAGRAM_USERNAME) {
     app.use('/api/instagram', require('./src/features/instagram/controller'));
 }
+if (process.env.DISCORD_SERVER_CODE) {
+    app.use('/api/discord', require('./src/features/discord/controller'));
+}
 
 
 
