@@ -7,7 +7,9 @@ const service = require('./service');
 cron.eachHour(service.fetchDiscordData, 'Discord');
 
 // Launch first fetch immediately
-service.fetchDiscordData();
+if (process.env.LAUNCH_AT_STARTUP === "true") {
+    service.fetchDiscordData();
+}
 
 // Routes
 router.get('/', async (req, res) => {

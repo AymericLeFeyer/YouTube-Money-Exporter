@@ -7,7 +7,9 @@ const service = require('./service');
 cron.eachHour(service.fetchInstagramData, 'Instagram');
 
 // Launch first fetch immediately
-service.fetchInstagramData();
+if (process.env.LAUNCH_AT_STARTUP === "true") {
+    service.fetchInstagramData();
+}
 
 // Routes
 router.get('/', async (req, res) => {

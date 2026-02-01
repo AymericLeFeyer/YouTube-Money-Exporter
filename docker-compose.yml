@@ -20,5 +20,6 @@ services:
       - INSTAGRAM_USERNAME=${INSTAGRAM_USERNAME}
       - SEARCH_API_APIKEY=${SEARCH_API_APIKEY}
       - DISCORD_SERVER_CODE=${DISCORD_SERVER_CODE}
+      - LAUNCH_AT_STARTUP=${LAUNCH_AT_STARTUP}
     restart: always
     command: npm run start

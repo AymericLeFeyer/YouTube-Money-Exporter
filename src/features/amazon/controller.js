@@ -7,7 +7,9 @@ const service = require('./service');
 cron.eachHour(service.fetchAmazonAffiliation, 'Amazon');
 
 // Launch first fetch immediately
-service.fetchAmazonAffiliation();
+if (process.env.LAUNCH_AT_STARTUP === "true") {
+    service.fetchAmazonAffiliation();
+}
 
 // Routes
 router.get('/', async (req, res) => {
