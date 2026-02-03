@@ -21,7 +21,7 @@ exports.getYouTubeReportingData = async () => {
     prev.setDate(prev.getDate() - 30);
     const startDate = prev.toISOString().split('T')[0];
 
-    const firstDayOfMonth = new Date(now.getFullYear(), now.getMonth(), 1).toISOString().split('T')[0];
+    const firstDayOfMonth = new Date(now.getFullYear(), now.getMonth(), 2).toISOString().split('T')[0];
 
     const channel = await youtube.channels.list({ part: 'statistics', mine: true });
 
@@ -31,8 +31,6 @@ exports.getYouTubeReportingData = async () => {
       endDate: today,
       metrics: 'views,estimatedMinutesWatched,averageViewDuration,subscribersGained,subscribersLost,likes,comments,shares,estimatedRevenue'
     });
-
-    console.log(firstDayOfMonth, today);
 
     let currentMonthReport = await analytics.reports.query({
       ids: 'channel==MINE',
