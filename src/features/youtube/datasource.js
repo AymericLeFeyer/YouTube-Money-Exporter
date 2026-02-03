@@ -32,6 +32,8 @@ exports.getYouTubeReportingData = async () => {
       metrics: 'views,estimatedMinutesWatched,averageViewDuration,subscribersGained,subscribersLost,likes,comments,shares,estimatedRevenue'
     });
 
+    console.log(firstDayOfMonth, today);
+
     let currentMonthReport = await analytics.reports.query({
       ids: 'channel==MINE',
       startDate: firstDayOfMonth,
@@ -61,8 +63,6 @@ exports.getYouTubeReportingData = async () => {
       thumbnail: playlistItems.data.items[0].snippet.thumbnails?.high?.url || '',
       stats: lastVideoStats,
     }
-
-    console.log(currentMonthReport.data)
 
     if (currentMonthReport.data.rows.length === 0) {
       currentMonthReport.data.rows.push(new Array(9).fill(0));
