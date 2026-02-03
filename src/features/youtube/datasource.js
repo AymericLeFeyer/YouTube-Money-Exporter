@@ -12,11 +12,11 @@ exports.getYouTubeReportingData = async () => {
 
   const youtube = google.youtube({ version: 'v3', auth });
   const analytics = google.youtubeAnalytics({ version: 'v2', auth });
-  
+
   try {
     const now = new Date();
     const today = now.toISOString().split('T')[0];
-    
+
     const prev = new Date();
     prev.setDate(prev.getDate() - 30);
     const startDate = prev.toISOString().split('T')[0];
@@ -41,8 +41,8 @@ exports.getYouTubeReportingData = async () => {
 
     // Last video stats
     const channelData = channel.data.items[0];
-    const uploadsPlaylistId = channel.contentDetails?.relatedPlaylists?.uploads 
-                             || channelData.id.replace(/^UC/, 'UU');
+    const uploadsPlaylistId = channel.contentDetails?.relatedPlaylists?.uploads
+      || channelData.id.replace(/^UC/, 'UU');
     const playlistItems = await youtube.playlistItems.list({
       part: 'snippet',
       playlistId: uploadsPlaylistId,
@@ -57,10 +57,12 @@ exports.getYouTubeReportingData = async () => {
     const lastVideoStats = lastVideoStatsResponse.data.items[0].statistics;
 
     const lastVideo = {
-      title : playlistItems.data.items[0].snippet.title,
-      thumbnail : playlistItems.data.items[0].snippet.thumbnails?.high?.url || '',
-      stats : lastVideoStats,
+      title: playlistItems.data.items[0].snippet.title,
+      thumbnail: playlistItems.data.items[0].snippet.thumbnails?.high?.url || '',
+      stats: lastVideoStats,
     }
+
+    console.log(currentMonthReport.data)
 
     if (currentMonthReport.data.rows.length === 0) {
       currentMonthReport.data.rows.push(new Array(9).fill(0));
